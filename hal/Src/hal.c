@@ -7,13 +7,21 @@ bool hal_is_running(void)
     return running;
 }
 
-__WEAK void app_config_init(void) {}
+__WEAK void app_config_init(void)
+{
+}
 
-__WEAK void app_dbg_init(void) {}
+__WEAK void app_dbg_init(void)
+{
+}
 
-__WEAK void app_init(void) {}
+__WEAK void app_init(void)
+{
+}
 
-__WEAK void app_loop(void) {}
+__WEAK void app_loop(void)
+{
+}
 
 void hal_init(void)
 {
@@ -24,7 +32,7 @@ void hal_init(void)
     utl_dbg_init();
     app_dbg_init();
 
-#if HAL_CPU_ENABLED ==1
+#if HAL_CPU_ENABLED == 1
     hal_cpu_init();
     srand(hal_cpu_random_seed_get());
 #endif

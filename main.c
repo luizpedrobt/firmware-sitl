@@ -1,13 +1,13 @@
 
-#include "FreeRTOSConfig.h"
 #include "FreeRTOS.h"
+#include "FreeRTOSConfig.h"
 #include "hal/Inc/hal.h"
 #include "task.h"
 #include <stdio.h>
 
-static void app_task(void* arg)
+static void app_task(void *arg)
 {
-    while(1)
+    while (1)
     {
         hal_loop();
         vTaskDelay(pdMS_TO_TICKS(1000));

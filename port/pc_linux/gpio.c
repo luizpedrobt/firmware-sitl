@@ -16,22 +16,20 @@ typedef struct gpio_permission_s
     uint8_t pin;
     bool can_read;
     bool can_write;
-} gpio_permission_t; 
+} gpio_permission_t;
 
 // ==========================================================================================
 
-static gpio_record_t gpio_ctrl[HAL_GPIO_PIN_NUM] = 
-{ 
-    #define X(PIN, INDEX) { .header = HEADER, .pin = PIN, .state = 0 },
-        XMACRO_GPIO_PINS
-    #undef X
+static gpio_record_t gpio_ctrl[HAL_GPIO_PIN_NUM] = {
+#define X(PIN, INDEX) {.header = HEADER, .pin = PIN, .state = 0},
+    XMACRO_GPIO_PINS
+#undef X
 };
 
-static gpio_permission_t gpio_permissions[HAL_GPIO_PIN_NUM] = 
-{ 
-    #define X(PIN, INDEX) { .pin = PIN, .can_read = false, .can_write = false },
-        XMACRO_GPIO_PINS
-    #undef X
+static gpio_permission_t gpio_permissions[HAL_GPIO_PIN_NUM] = {
+#define X(PIN, INDEX) {.pin = PIN, .can_read = false, .can_write = false},
+    XMACRO_GPIO_PINS
+#undef X
 };
 
 static FILE *fp = NULL;
@@ -64,24 +62,24 @@ static void port_gpio_configure(hal_gpio_pin_t pin, hal_gpio_mode_t mode, hal_gp
 {
     fp = fopen("gpio.bin", "ab");
     if (!fp)
-    {   
+    {
         return;
     }
 
     switch (mode)
     {
-        case HAL_GPIO_MODE_INPUT:
-            gpio_permissions[pin].can_read = true;
-            gpio_permissions[pin].can_write = false;
-            break;
+    case HAL_GPIO_MODE_INPUT:
+        gpio_permissions[pin].can_read = true;
+        gpio_permissions[pin].can_write = false;
+        break;
 
-        case HAL_GPIO_MODE_OUTPUT:
-            gpio_permissions[pin].can_read = true;
-            gpio_permissions[pin].can_write = true;
-            break;
+    case HAL_GPIO_MODE_OUTPUT:
+        gpio_permissions[pin].can_read = true;
+        gpio_permissions[pin].can_write = true;
+        break;
 
-        default:
-            break;
+    default:
+        break;
     }
 
     // garante header correto
@@ -140,7 +138,7 @@ static bool port_gpio_get(hal_gpio_pin_t pin)
         return false;
     }
 
-    gpio_sync_from_file();  
+    gpio_sync_from_file();
     UTL_DBG_PRINTF(UTL_DBG_MOD_GPIO, "GPIO pin %d state: %d\n", pin, gpio_ctrl[pin].state);
 
     return gpio_ctrl[pin].state;
@@ -171,12 +169,9 @@ static void port_gpio_toggle(hal_gpio_pin_t pin)
     UTL_DBG_PRINTF(UTL_DBG_MOD_GPIO, "GPIO pin %d toggled to %d\n", pin, gpio_ctrl[pin].state);
 }
 
-hal_gpio_driver_t HAL_GPIO_DRIVER =
-{
-    .configure = port_gpio_configure,
-    .interrupt_set = port_gpio_interrupt_set,
-    .interrupt_clear = port_gpio_interrupt_clear,
-    .set = port_gpio_set,
-    .get = port_gpio_get,
-    .toggle = port_gpio_toggle
-};
+hal_gpio_driver_t HAL_GPIO_DRIVER = {.configure = port_gpio_configure,
+                                     .interrupt_set = port_gpio_interrupt_set,
+                                     .interrupt_clear = port_gpio_interrupt_clear,
+                                     .set = port_gpio_set,
+                                     .get = port_gpio_get,
+                                     .toggle = port_gpio_toggle};

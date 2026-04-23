@@ -2,9 +2,9 @@
 
 #include "hal_cfg.h"
 
-#include "utl_dbg.h"
-#include "utl_crc16.h"
 #include "utl_cbf.h"
+#include "utl_crc16.h"
+#include "utl_dbg.h"
 #include "utl_io.h"
 
 #if UTL_COBS_ENABLED == 1

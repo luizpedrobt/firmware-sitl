@@ -2,16 +2,16 @@
 
 typedef void (*hal_gpio_cbk_t)(void);
 
-#define XMACRO_GPIO_PINS \
-    X(HAL_GPIO_PIN_0, 0) \
-    X(HAL_GPIO_PIN_1, 1) 
+#define XMACRO_GPIO_PINS                                                                                               \
+    X(HAL_GPIO_PIN_0, 0)                                                                                               \
+    X(HAL_GPIO_PIN_1, 1)
 
 typedef enum hal_gpio_pin_e
 {
-	#define X(PIN, INDEX) PIN = INDEX,
-        XMACRO_GPIO_PINS
-    #undef X
-	HAL_GPIO_PIN_NUM,
+#define X(PIN, INDEX) PIN = INDEX,
+    XMACRO_GPIO_PINS
+#undef X
+        HAL_GPIO_PIN_NUM,
 } hal_gpio_pin_t;
 
 typedef enum hal_gpio_interrupt_state_e

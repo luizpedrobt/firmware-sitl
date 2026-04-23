@@ -1,3 +1,5 @@
 #include "hal.h"
 
-void hal_app_init(void) {}
+void hal_app_init(void)
+{
+}

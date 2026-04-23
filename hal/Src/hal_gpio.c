@@ -2,7 +2,7 @@
 
 #if HAL_GPIO_ENABLED == 1
 
-static hal_gpio_driver_t* drv = &HAL_GPIO_DRIVER;
+static hal_gpio_driver_t *drv = &HAL_GPIO_DRIVER;
 
 void hal_gpio_configure(hal_gpio_pin_t pin, hal_gpio_mode_t mode, hal_gpio_pull_t pull, hal_gpio_cbk_t cbk)
 {

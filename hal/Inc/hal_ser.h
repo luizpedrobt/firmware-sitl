@@ -33,13 +33,13 @@ typedef enum hal_ser_baudrate_e
     HAL_SER_BAUDRATE_38400,
     HAL_SER_BAUDRATE_57600,
     HAL_SER_BAUDRATE_115200,
-	HAL_SER_BAUDRATE_460800,
-	HAL_SER_BAUDRATE_921600,
+    HAL_SER_BAUDRATE_460800,
+    HAL_SER_BAUDRATE_921600,
 } hal_ser_baudrate_t;
 
 typedef enum hal_ser_dev_e
 {
-	HAL_SER_PORTS,
+    HAL_SER_PORTS,
     HAL_SER_NUM_DEVS,
 } hal_ser_dev_t;
 
@@ -56,13 +56,13 @@ typedef struct hal_ser_config_s
 
 typedef struct hal_ser_driver_s
 {
-    void (*configure)(hal_ser_dev_t dev, hal_ser_baudrate_t baud_rate, hal_ser_data_size_t data_size, hal_ser_parity_t parity,
-                      hal_ser_stop_bits_t stop_bits, hal_ser_flow_control_t flow_control);
+    void (*configure)(hal_ser_dev_t dev, hal_ser_baudrate_t baud_rate, hal_ser_data_size_t data_size,
+                      hal_ser_parity_t parity, hal_ser_stop_bits_t stop_bits, hal_ser_flow_control_t flow_control);
     void (*flush)(hal_ser_dev_t dev);
     uint16_t (*bytes_available)(hal_ser_dev_t dev);
-    int16_t (*read)(hal_ser_dev_t dev, uint8_t* buffer, uint16_t size);
-    int16_t (*read_byte)(hal_ser_dev_t dev, uint8_t* c);
-    void (*write)(hal_ser_dev_t dev, uint8_t* buffer, uint16_t len);
+    int16_t (*read)(hal_ser_dev_t dev, uint8_t *buffer, uint16_t size);
+    int16_t (*read_byte)(hal_ser_dev_t dev, uint8_t *c);
+    void (*write)(hal_ser_dev_t dev, uint8_t *buffer, uint16_t len);
     void (*write_byte)(hal_ser_dev_t dev, uint8_t c);
     void (*open)(hal_ser_dev_t dev);
     void (*close)(hal_ser_dev_t dev);
@@ -71,14 +71,14 @@ typedef struct hal_ser_driver_s
     void (*deinit)(void);
 } hal_ser_driver_t;
 
-void hal_ser_configure(hal_ser_dev_t dev, hal_ser_baudrate_t baud_rate, hal_ser_data_size_t data_size, hal_ser_parity_t parity,
-                       hal_ser_stop_bits_t stop_bits, hal_ser_flow_control_t flow_control);
+void hal_ser_configure(hal_ser_dev_t dev, hal_ser_baudrate_t baud_rate, hal_ser_data_size_t data_size,
+                       hal_ser_parity_t parity, hal_ser_stop_bits_t stop_bits, hal_ser_flow_control_t flow_control);
 void hal_ser_flush(hal_ser_dev_t dev);
 void hal_ser_interrupt_set(hal_ser_dev_t dev, hal_ser_interrupt_t fun);
 uint16_t hal_ser_bytes_available(hal_ser_dev_t dev);
-int16_t hal_ser_read(hal_ser_dev_t dev, uint8_t* buffer, uint16_t size);
-int16_t hal_ser_read_byte(hal_ser_dev_t dev, uint8_t* c);
-void hal_ser_write(hal_ser_dev_t dev, uint8_t* buffer, uint16_t len);
+int16_t hal_ser_read(hal_ser_dev_t dev, uint8_t *buffer, uint16_t size);
+int16_t hal_ser_read_byte(hal_ser_dev_t dev, uint8_t *c);
+void hal_ser_write(hal_ser_dev_t dev, uint8_t *buffer, uint16_t len);
 void hal_ser_write_byte(hal_ser_dev_t dev, uint8_t c);
 void hal_ser_open(hal_ser_dev_t dev);
 void hal_ser_close(hal_ser_dev_t dev);

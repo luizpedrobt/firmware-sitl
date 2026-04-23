@@ -2,7 +2,7 @@
 
 #if HAL_CPU_ENABLED == 1
 
-static hal_cpu_driver_t* drv = &HAL_CPU_DRIVER;
+static hal_cpu_driver_t *drv = &HAL_CPU_DRIVER;
 
 hal_cpu_state_t hal_cpu_state_get(void)
 {
@@ -44,7 +44,7 @@ void hal_cpu_shutdown_ms(uint32_t tmr_ms)
     drv->shutdown_ms(tmr_ms);
 }
 
-void hal_cpu_id_get(uint8_t* id)
+void hal_cpu_id_get(uint8_t *id)
 {
     drv->id_get(id);
 }
@@ -79,12 +79,13 @@ void hal_cpu_reset_source_set(uint32_t sources)
     drv->reset_source_set(sources);
 }
 
-void hal_cpu_fault_context_copy(uint8_t* dst)
+void hal_cpu_fault_context_copy(uint8_t *dst)
 {
     drv->fault_context_copy(dst);
 }
 
-// enabled requested peripherals and returns the previous state (before changing)
+// enabled requested peripherals and returns the previous state (before
+// changing)
 uint32_t hal_cpu_periph_enable(uint32_t peripherals)
 {
     return drv->periph_enable(peripherals);

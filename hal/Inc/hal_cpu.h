@@ -31,7 +31,8 @@ enum hal_cpu_reset_sources_e
     HAL_CPU_RESET_SOFTWARE = (1 << 4),    /**< Reset devido a uma chamada de software */
     HAL_CPU_RESET_IWDG = (1 << 5),        /**< Reset devido ao watchdog independente de janela */
     HAL_CPU_RESET_WWDG = (1 << 6),        /**< Reset devido ao watchdog de janela */
-    HAL_CPU_RESET_LOW_POWER = (1 << 7),   /**< Reset devido a uma entrada indevida em modo de baixo consumo */
+    HAL_CPU_RESET_LOW_POWER = (1 << 7),   /**< Reset devido a uma entrada indevida
+                                             em modo de baixo consumo */
 };
 
 // TODO renomear esses eventos depois para consistencia
@@ -91,14 +92,14 @@ typedef struct hal_cpu_driver_s
     void (*low_power_enter)(void);
     uint32_t (*random_seed_get)(void);
     hal_cpu_event_out_t (*sleep_on_event_ms)(hal_cpu_event_t event, uint32_t tmr_ms);
-    void (*id_get)(uint8_t* id);
+    void (*id_get)(uint8_t *id);
     void (*watchdog_refresh)(void);
     void (*reset)(void);
     uint32_t (*reset_source_get)(void); /**< Obtem a fonte do último reset */
     void (*init)(void);
     void (*trigger_exec)(void);                 /**< Força uma chamada de pensv */
     void (*reset_source_set)(uint32_t sources); /**< Seta a fonte de reset */
-    void (*fault_context_copy)(uint8_t* dst);
+    void (*fault_context_copy)(uint8_t *dst);
     uint32_t (*periph_enable)(uint32_t peripherals);
     hal_cpu_speed_t (*speed_set)(hal_cpu_speed_t speed);
     void (*code_rebase)(hal_flash_dev_t dev, uint32_t offset);
@@ -113,14 +114,14 @@ uint32_t hal_cpu_random_seed_get(void);
 hal_cpu_event_out_t hal_cpu_sleep_on_event_ms(hal_cpu_event_t event, uint32_t tmr_ms);
 void hal_cpu_sleep_ms(uint32_t tmr_ms);
 void hal_cpu_shutdown_ms(uint32_t tmr_ms);
-void hal_cpu_id_get(uint8_t* id);
+void hal_cpu_id_get(uint8_t *id);
 void hal_cpu_watchdog_refresh(void);
 void hal_cpu_reset(void);
 void hal_cpu_init(void);
 void hal_cpu_trigger_exec(void);
 uint32_t hal_cpu_reset_source_get(void);
 void hal_cpu_reset_source_set(uint32_t sources);
-void hal_cpu_fault_context_copy(uint8_t* dst);
+void hal_cpu_fault_context_copy(uint8_t *dst);
 uint32_t hal_cpu_periph_enable(uint32_t peripherals);
 hal_cpu_speed_t hal_cpu_speed_set(hal_cpu_speed_t speed);
 void hal_cpu_code_rebase(hal_flash_dev_t dev, uint32_t offset);

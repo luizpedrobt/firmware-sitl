@@ -1,8 +1,8 @@
 #include "hal.h"
 
 #include <pthread.h>
-#include <unistd.h>
 #include <stdint.h>
+#include <unistd.h>
 
 static volatile uint32_t cpu_systick = 0;
 static volatile uint32_t millis = 0;
@@ -15,13 +15,13 @@ static hal_time_cbk_t time_cbks[HAL_TIME_NUM_CBKS] = {0};
 
 static pthread_t tick_thread;
 
-static void* tick_loop(void* arg)
+static void *tick_loop(void *arg)
 {
     (void)arg;
 
     while (1)
     {
-        usleep(1000); 
+        usleep(1000);
 
         cpu_systick++;
 
@@ -72,7 +72,6 @@ static void* tick_loop(void* arg)
                     time_cbks[HAL_TIME_1D_CBK]();
                 }
             }
-
         }
     }
 
@@ -102,14 +101,14 @@ static uint32_t port_time_elapsed_ms(uint32_t old, uint32_t now)
     }
 }
 
-static void port_time_runtime_get_ms(hal_time_runtime_t* runtime)
+static void port_time_runtime_get_ms(hal_time_runtime_t *runtime)
 {
     if (runtime)
     {
         runtime->seconds = seconds;
         runtime->minutes = minutes;
-        runtime->hours   = hours;
-        runtime->days    = days;
+        runtime->hours = hours;
+        runtime->days = days;
     }
 }
 
@@ -121,8 +120,7 @@ static void port_time_cbk_register(hal_time_cbk_t cbk, hal_time_cbk_type_t type)
     }
 }
 
-hal_time_driver_t HAL_TIME_DRIVER =
-{
+hal_time_driver_t HAL_TIME_DRIVER = {
     .init = port_time_init,
     .time_get_ms = port_time_get_ms,
     .time_elapsed_ms = port_time_elapsed_ms,

@@ -1,27 +1,24 @@
 
 #pragma once
 
-#define HAL_LED_NUM_AUTO_LEDS  0
-#define HAL_WDG_ENABLED        0
-#define APP_DEBUG_SLEEP_MODE   0
-#define HAL_SERIAL_DEBUG       0
+#define HAL_LED_NUM_AUTO_LEDS 0
+#define HAL_WDG_ENABLED 0
+#define APP_DEBUG_SLEEP_MODE 0
+#define HAL_SERIAL_DEBUG 0
 
 #define HAL_APP_START_ADDRESS START_ADDRESS
 
 // enable hal/utl modules
 
-#define HAL_CPU_ENABLED   0
-#define HAL_GPIO_ENABLED  1
-#define HAL_RTC_ENABLED   0
+#define HAL_CPU_ENABLED 0
+#define HAL_GPIO_ENABLED 1
+#define HAL_RTC_ENABLED 0
 
-#define HAL_SER_ENABLED   0
+#define HAL_SER_ENABLED 0
 
-#define HAL_TIME_ENABLED  1
+#define HAL_TIME_ENABLED 1
 
 #define UTL_QCBOR_ENABLED 0
-#define UTL_COBS_ENABLED  0
+#define UTL_COBS_ENABLED 0
 
-#define HAL_SER_PORTS \
-	HAL_SER_DEV0 = 0
-
-
+#define HAL_SER_PORTS HAL_SER_DEV0 = 0

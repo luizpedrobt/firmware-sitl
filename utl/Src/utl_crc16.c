@@ -1,5 +1,5 @@
-#include <stdint.h>
 #include <stddef.h>
+#include <stdint.h>
 
 #include "utl_crc16.h"
 
@@ -25,9 +25,9 @@ static const uint16_t ccitt_hash[] = {
     0x2e93, 0x3eb2, 0x0ed1, 0x1ef0,
 };
 
-uint16_t utl_crc16_data(const uint8_t* buffer, size_t size, uint16_t crc)
+uint16_t utl_crc16_data(const uint8_t *buffer, size_t size, uint16_t crc)
 {
-    while(size-- > 0)
+    while (size-- > 0)
     {
         crc = (crc << 8) ^ ccitt_hash[((crc >> 8) ^ *(buffer++)) & 0x00FF];
     }
