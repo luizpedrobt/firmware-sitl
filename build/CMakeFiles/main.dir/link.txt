@@ -1,1 +1,0 @@
-/usr/lib/ccache/cc -g CMakeFiles/main.dir/main.c.o -o main  -Wl,--whole-archive app/libapp.a -Wl,--no-whole-archive hal/libhal.a utl/libutl.a port/pc_linux/libport_linux.a third_party/freertos/libfreertos_kernel.a -lpthread -lm hal/libhal.a utl/libutl.a 

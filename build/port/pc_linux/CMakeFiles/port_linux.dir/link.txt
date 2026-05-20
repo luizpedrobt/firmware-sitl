@@ -1,2 +1,0 @@
-/usr/bin/ar qc libport_linux.a CMakeFiles/port_linux.dir/gpio.c.o CMakeFiles/port_linux.dir/time.c.o
-/usr/bin/ranlib libport_linux.a
