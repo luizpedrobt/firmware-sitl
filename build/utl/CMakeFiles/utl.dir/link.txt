@@ -1,0 +1,2 @@
+/usr/bin/ar qc libutl.a CMakeFiles/utl.dir/Src/utl_cbf.c.o CMakeFiles/utl.dir/Src/utl_cobs.c.o CMakeFiles/utl.dir/Src/utl_crc16.c.o CMakeFiles/utl.dir/Src/utl_dbg.c.o CMakeFiles/utl.dir/Src/utl_io.c.o
+/usr/bin/ranlib libutl.a

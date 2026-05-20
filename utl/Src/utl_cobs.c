@@ -1,4 +1,3 @@
-#include "hal_cfg.h"
 
 #if UTL_COBS_ENABLED == 1
 

@@ -1,4 +1,8 @@
-#include "hal.h"
+#include <stdio.h>
+#include <stdint.h>
+#include <ctype.h>
+#include <stdbool.h>
+#include <unistd.h>
 #include "utl.h"
 
 #define UTL_DBG_NUM_CHARS_PER_LINE 32
@@ -51,26 +55,40 @@ void utl_dbg_dump(char *stamp, uint8_t *data, size_t size)
     uint8_t *ptr = data;
     uint8_t ascii[UTL_DBG_NUM_CHARS_PER_LINE + 1];
     size_t ascii_pos = 0;
+    char buf[128];
+    int len;
 
-    printf("%s", stamp);
+    len = snprintf(buf, sizeof(buf), "%s", stamp);
+    if (len > 0)
+        write(STDOUT_FILENO, buf, len);
 
     for (size_t pos = 0; pos < size; pos++)
     {
         if (pos && (pos % UTL_DBG_NUM_CHARS_PER_LINE == 0))
         {
             ascii[ascii_pos] = '\0';
-            printf(" %s\n%s", (char *)ascii, stamp);
+            len = snprintf(buf, sizeof(buf), " %s\n%s", (char *)ascii, stamp);
+            if (len > 0)
+                write(STDOUT_FILENO, buf, len);
             ascii_pos = 0;
         }
 
         if (pos % UTL_DBG_NUM_CHARS_PER_LINE == 0)
-            printf("%04X ", (unsigned int)pos);
+        {
+            len = snprintf(buf, sizeof(buf), "%04X ", (unsigned int)pos);
+            if (len > 0)
+                write(STDOUT_FILENO, buf, len);
+        }
 
         ascii[ascii_pos++] = isprint(*ptr) ? *ptr : '.';
-        printf("%02X", *ptr++);
+        len = snprintf(buf, sizeof(buf), "%02X", *ptr++);
+        if (len > 0)
+            write(STDOUT_FILENO, buf, len);
     }
     ascii[ascii_pos] = '\0';
-    printf(" %s\n", (char *)ascii);
+    len = snprintf(buf, sizeof(buf), " %s\n", (char *)ascii);
+    if (len > 0)
+        write(STDOUT_FILENO, buf, len);
 }
 
 void utl_dbg_init(void)

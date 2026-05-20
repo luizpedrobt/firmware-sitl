@@ -1,0 +1,158 @@
+[
+{
+  "directory": "/home/pedro-bittencourt/sitl/build",
+  "command": "/usr/lib/ccache/cc -D_GNU_SOURCE -I/home/pedro-bittencourt/sitl/app/Inc -I/home/pedro-bittencourt/sitl/hal/Inc -I/home/pedro-bittencourt/sitl/utl/Inc -I/home/pedro-bittencourt/sitl/third_party/freertos/include/. -I/home/pedro-bittencourt/sitl/third_party/freertos/portable/ThirdParty/GCC/Posix -I/home/pedro-bittencourt/sitl/third_party/freertos/portable/ThirdParty/GCC/Posix/utils -isystem /home/pedro-bittencourt/sitl/config -g -std=gnu11 -Wall -Wextra -fdata-sections -ffunction-sections -g -O0 -o CMakeFiles/main.dir/main.c.o -c /home/pedro-bittencourt/sitl/main.c",
+  "file": "/home/pedro-bittencourt/sitl/main.c",
+  "output": "CMakeFiles/main.dir/main.c.o"
+},
+{
+  "directory": "/home/pedro-bittencourt/sitl/build/app",
+  "command": "/usr/lib/ccache/cc  -I/home/pedro-bittencourt/sitl/app/Inc -I/home/pedro-bittencourt/sitl/hal/Inc -I/home/pedro-bittencourt/sitl/utl/Inc -I/home/pedro-bittencourt/sitl/config -g -std=gnu11 -o CMakeFiles/app.dir/Src/app.c.o -c /home/pedro-bittencourt/sitl/app/Src/app.c",
+  "file": "/home/pedro-bittencourt/sitl/app/Src/app.c",
+  "output": "app/CMakeFiles/app.dir/Src/app.c.o"
+},
+{
+  "directory": "/home/pedro-bittencourt/sitl/build/hal",
+  "command": "/usr/lib/ccache/cc  -I/home/pedro-bittencourt/sitl/hal/Inc -I/home/pedro-bittencourt/sitl/utl/Inc -I/home/pedro-bittencourt/sitl/config -g -std=gnu11 -o CMakeFiles/hal.dir/Src/hal.c.o -c /home/pedro-bittencourt/sitl/hal/Src/hal.c",
+  "file": "/home/pedro-bittencourt/sitl/hal/Src/hal.c",
+  "output": "hal/CMakeFiles/hal.dir/Src/hal.c.o"
+},
+{
+  "directory": "/home/pedro-bittencourt/sitl/build/hal",
+  "command": "/usr/lib/ccache/cc  -I/home/pedro-bittencourt/sitl/hal/Inc -I/home/pedro-bittencourt/sitl/utl/Inc -I/home/pedro-bittencourt/sitl/config -g -std=gnu11 -o CMakeFiles/hal.dir/Src/hal_app.c.o -c /home/pedro-bittencourt/sitl/hal/Src/hal_app.c",
+  "file": "/home/pedro-bittencourt/sitl/hal/Src/hal_app.c",
+  "output": "hal/CMakeFiles/hal.dir/Src/hal_app.c.o"
+},
+{
+  "directory": "/home/pedro-bittencourt/sitl/build/hal",
+  "command": "/usr/lib/ccache/cc  -I/home/pedro-bittencourt/sitl/hal/Inc -I/home/pedro-bittencourt/sitl/utl/Inc -I/home/pedro-bittencourt/sitl/config -g -std=gnu11 -o CMakeFiles/hal.dir/Src/hal_cpu.c.o -c /home/pedro-bittencourt/sitl/hal/Src/hal_cpu.c",
+  "file": "/home/pedro-bittencourt/sitl/hal/Src/hal_cpu.c",
+  "output": "hal/CMakeFiles/hal.dir/Src/hal_cpu.c.o"
+},
+{
+  "directory": "/home/pedro-bittencourt/sitl/build/hal",
+  "command": "/usr/lib/ccache/cc  -I/home/pedro-bittencourt/sitl/hal/Inc -I/home/pedro-bittencourt/sitl/utl/Inc -I/home/pedro-bittencourt/sitl/config -g -std=gnu11 -o CMakeFiles/hal.dir/Src/hal_gpio.c.o -c /home/pedro-bittencourt/sitl/hal/Src/hal_gpio.c",
+  "file": "/home/pedro-bittencourt/sitl/hal/Src/hal_gpio.c",
+  "output": "hal/CMakeFiles/hal.dir/Src/hal_gpio.c.o"
+},
+{
+  "directory": "/home/pedro-bittencourt/sitl/build/hal",
+  "command": "/usr/lib/ccache/cc  -I/home/pedro-bittencourt/sitl/hal/Inc -I/home/pedro-bittencourt/sitl/utl/Inc -I/home/pedro-bittencourt/sitl/config -g -std=gnu11 -o CMakeFiles/hal.dir/Src/hal_rtc.c.o -c /home/pedro-bittencourt/sitl/hal/Src/hal_rtc.c",
+  "file": "/home/pedro-bittencourt/sitl/hal/Src/hal_rtc.c",
+  "output": "hal/CMakeFiles/hal.dir/Src/hal_rtc.c.o"
+},
+{
+  "directory": "/home/pedro-bittencourt/sitl/build/hal",
+  "command": "/usr/lib/ccache/cc  -I/home/pedro-bittencourt/sitl/hal/Inc -I/home/pedro-bittencourt/sitl/utl/Inc -I/home/pedro-bittencourt/sitl/config -g -std=gnu11 -o CMakeFiles/hal.dir/Src/hal_ser.c.o -c /home/pedro-bittencourt/sitl/hal/Src/hal_ser.c",
+  "file": "/home/pedro-bittencourt/sitl/hal/Src/hal_ser.c",
+  "output": "hal/CMakeFiles/hal.dir/Src/hal_ser.c.o"
+},
+{
+  "directory": "/home/pedro-bittencourt/sitl/build/hal",
+  "command": "/usr/lib/ccache/cc  -I/home/pedro-bittencourt/sitl/hal/Inc -I/home/pedro-bittencourt/sitl/utl/Inc -I/home/pedro-bittencourt/sitl/config -g -std=gnu11 -o CMakeFiles/hal.dir/Src/hal_time.c.o -c /home/pedro-bittencourt/sitl/hal/Src/hal_time.c",
+  "file": "/home/pedro-bittencourt/sitl/hal/Src/hal_time.c",
+  "output": "hal/CMakeFiles/hal.dir/Src/hal_time.c.o"
+},
+{
+  "directory": "/home/pedro-bittencourt/sitl/build/utl",
+  "command": "/usr/lib/ccache/cc  -I/home/pedro-bittencourt/sitl/utl/Inc -I/home/pedro-bittencourt/sitl/config -g -std=gnu11 -o CMakeFiles/utl.dir/Src/utl_cbf.c.o -c /home/pedro-bittencourt/sitl/utl/Src/utl_cbf.c",
+  "file": "/home/pedro-bittencourt/sitl/utl/Src/utl_cbf.c",
+  "output": "utl/CMakeFiles/utl.dir/Src/utl_cbf.c.o"
+},
+{
+  "directory": "/home/pedro-bittencourt/sitl/build/utl",
+  "command": "/usr/lib/ccache/cc  -I/home/pedro-bittencourt/sitl/utl/Inc -I/home/pedro-bittencourt/sitl/config -g -std=gnu11 -o CMakeFiles/utl.dir/Src/utl_cobs.c.o -c /home/pedro-bittencourt/sitl/utl/Src/utl_cobs.c",
+  "file": "/home/pedro-bittencourt/sitl/utl/Src/utl_cobs.c",
+  "output": "utl/CMakeFiles/utl.dir/Src/utl_cobs.c.o"
+},
+{
+  "directory": "/home/pedro-bittencourt/sitl/build/utl",
+  "command": "/usr/lib/ccache/cc  -I/home/pedro-bittencourt/sitl/utl/Inc -I/home/pedro-bittencourt/sitl/config -g -std=gnu11 -o CMakeFiles/utl.dir/Src/utl_crc16.c.o -c /home/pedro-bittencourt/sitl/utl/Src/utl_crc16.c",
+  "file": "/home/pedro-bittencourt/sitl/utl/Src/utl_crc16.c",
+  "output": "utl/CMakeFiles/utl.dir/Src/utl_crc16.c.o"
+},
+{
+  "directory": "/home/pedro-bittencourt/sitl/build/utl",
+  "command": "/usr/lib/ccache/cc  -I/home/pedro-bittencourt/sitl/utl/Inc -I/home/pedro-bittencourt/sitl/config -g -std=gnu11 -o CMakeFiles/utl.dir/Src/utl_dbg.c.o -c /home/pedro-bittencourt/sitl/utl/Src/utl_dbg.c",
+  "file": "/home/pedro-bittencourt/sitl/utl/Src/utl_dbg.c",
+  "output": "utl/CMakeFiles/utl.dir/Src/utl_dbg.c.o"
+},
+{
+  "directory": "/home/pedro-bittencourt/sitl/build/utl",
+  "command": "/usr/lib/ccache/cc  -I/home/pedro-bittencourt/sitl/utl/Inc -I/home/pedro-bittencourt/sitl/config -g -std=gnu11 -o CMakeFiles/utl.dir/Src/utl_io.c.o -c /home/pedro-bittencourt/sitl/utl/Src/utl_io.c",
+  "file": "/home/pedro-bittencourt/sitl/utl/Src/utl_io.c",
+  "output": "utl/CMakeFiles/utl.dir/Src/utl_io.c.o"
+},
+{
+  "directory": "/home/pedro-bittencourt/sitl/build/third_party/freertos",
+  "command": "/usr/lib/ccache/cc  -I/home/pedro-bittencourt/sitl/third_party/freertos/include/. -I/home/pedro-bittencourt/sitl/third_party/freertos/portable/ThirdParty/GCC/Posix -I/home/pedro-bittencourt/sitl/third_party/freertos/portable/ThirdParty/GCC/Posix/utils -isystem /home/pedro-bittencourt/sitl/config -g -std=gnu11 -o CMakeFiles/freertos_kernel.dir/croutine.c.o -c /home/pedro-bittencourt/sitl/third_party/freertos/croutine.c",
+  "file": "/home/pedro-bittencourt/sitl/third_party/freertos/croutine.c",
+  "output": "third_party/freertos/CMakeFiles/freertos_kernel.dir/croutine.c.o"
+},
+{
+  "directory": "/home/pedro-bittencourt/sitl/build/third_party/freertos",
+  "command": "/usr/lib/ccache/cc  -I/home/pedro-bittencourt/sitl/third_party/freertos/include/. -I/home/pedro-bittencourt/sitl/third_party/freertos/portable/ThirdParty/GCC/Posix -I/home/pedro-bittencourt/sitl/third_party/freertos/portable/ThirdParty/GCC/Posix/utils -isystem /home/pedro-bittencourt/sitl/config -g -std=gnu11 -o CMakeFiles/freertos_kernel.dir/event_groups.c.o -c /home/pedro-bittencourt/sitl/third_party/freertos/event_groups.c",
+  "file": "/home/pedro-bittencourt/sitl/third_party/freertos/event_groups.c",
+  "output": "third_party/freertos/CMakeFiles/freertos_kernel.dir/event_groups.c.o"
+},
+{
+  "directory": "/home/pedro-bittencourt/sitl/build/third_party/freertos",
+  "command": "/usr/lib/ccache/cc  -I/home/pedro-bittencourt/sitl/third_party/freertos/include/. -I/home/pedro-bittencourt/sitl/third_party/freertos/portable/ThirdParty/GCC/Posix -I/home/pedro-bittencourt/sitl/third_party/freertos/portable/ThirdParty/GCC/Posix/utils -isystem /home/pedro-bittencourt/sitl/config -g -std=gnu11 -o CMakeFiles/freertos_kernel.dir/list.c.o -c /home/pedro-bittencourt/sitl/third_party/freertos/list.c",
+  "file": "/home/pedro-bittencourt/sitl/third_party/freertos/list.c",
+  "output": "third_party/freertos/CMakeFiles/freertos_kernel.dir/list.c.o"
+},
+{
+  "directory": "/home/pedro-bittencourt/sitl/build/third_party/freertos",
+  "command": "/usr/lib/ccache/cc  -I/home/pedro-bittencourt/sitl/third_party/freertos/include/. -I/home/pedro-bittencourt/sitl/third_party/freertos/portable/ThirdParty/GCC/Posix -I/home/pedro-bittencourt/sitl/third_party/freertos/portable/ThirdParty/GCC/Posix/utils -isystem /home/pedro-bittencourt/sitl/config -g -std=gnu11 -o CMakeFiles/freertos_kernel.dir/queue.c.o -c /home/pedro-bittencourt/sitl/third_party/freertos/queue.c",
+  "file": "/home/pedro-bittencourt/sitl/third_party/freertos/queue.c",
+  "output": "third_party/freertos/CMakeFiles/freertos_kernel.dir/queue.c.o"
+},
+{
+  "directory": "/home/pedro-bittencourt/sitl/build/third_party/freertos",
+  "command": "/usr/lib/ccache/cc  -I/home/pedro-bittencourt/sitl/third_party/freertos/include/. -I/home/pedro-bittencourt/sitl/third_party/freertos/portable/ThirdParty/GCC/Posix -I/home/pedro-bittencourt/sitl/third_party/freertos/portable/ThirdParty/GCC/Posix/utils -isystem /home/pedro-bittencourt/sitl/config -g -std=gnu11 -o CMakeFiles/freertos_kernel.dir/stream_buffer.c.o -c /home/pedro-bittencourt/sitl/third_party/freertos/stream_buffer.c",
+  "file": "/home/pedro-bittencourt/sitl/third_party/freertos/stream_buffer.c",
+  "output": "third_party/freertos/CMakeFiles/freertos_kernel.dir/stream_buffer.c.o"
+},
+{
+  "directory": "/home/pedro-bittencourt/sitl/build/third_party/freertos",
+  "command": "/usr/lib/ccache/cc  -I/home/pedro-bittencourt/sitl/third_party/freertos/include/. -I/home/pedro-bittencourt/sitl/third_party/freertos/portable/ThirdParty/GCC/Posix -I/home/pedro-bittencourt/sitl/third_party/freertos/portable/ThirdParty/GCC/Posix/utils -isystem /home/pedro-bittencourt/sitl/config -g -std=gnu11 -o CMakeFiles/freertos_kernel.dir/tasks.c.o -c /home/pedro-bittencourt/sitl/third_party/freertos/tasks.c",
+  "file": "/home/pedro-bittencourt/sitl/third_party/freertos/tasks.c",
+  "output": "third_party/freertos/CMakeFiles/freertos_kernel.dir/tasks.c.o"
+},
+{
+  "directory": "/home/pedro-bittencourt/sitl/build/third_party/freertos",
+  "command": "/usr/lib/ccache/cc  -I/home/pedro-bittencourt/sitl/third_party/freertos/include/. -I/home/pedro-bittencourt/sitl/third_party/freertos/portable/ThirdParty/GCC/Posix -I/home/pedro-bittencourt/sitl/third_party/freertos/portable/ThirdParty/GCC/Posix/utils -isystem /home/pedro-bittencourt/sitl/config -g -std=gnu11 -o CMakeFiles/freertos_kernel.dir/timers.c.o -c /home/pedro-bittencourt/sitl/third_party/freertos/timers.c",
+  "file": "/home/pedro-bittencourt/sitl/third_party/freertos/timers.c",
+  "output": "third_party/freertos/CMakeFiles/freertos_kernel.dir/timers.c.o"
+},
+{
+  "directory": "/home/pedro-bittencourt/sitl/build/third_party/freertos",
+  "command": "/usr/lib/ccache/cc  -I/home/pedro-bittencourt/sitl/third_party/freertos/include/. -I/home/pedro-bittencourt/sitl/third_party/freertos/portable/ThirdParty/GCC/Posix -I/home/pedro-bittencourt/sitl/third_party/freertos/portable/ThirdParty/GCC/Posix/utils -isystem /home/pedro-bittencourt/sitl/config -g -std=gnu11 -o CMakeFiles/freertos_kernel.dir/portable/MemMang/heap_4.c.o -c /home/pedro-bittencourt/sitl/third_party/freertos/portable/MemMang/heap_4.c",
+  "file": "/home/pedro-bittencourt/sitl/third_party/freertos/portable/MemMang/heap_4.c",
+  "output": "third_party/freertos/CMakeFiles/freertos_kernel.dir/portable/MemMang/heap_4.c.o"
+},
+{
+  "directory": "/home/pedro-bittencourt/sitl/build/third_party/freertos/portable",
+  "command": "/usr/lib/ccache/cc  -I/home/pedro-bittencourt/sitl/third_party/freertos/portable/ThirdParty/GCC/Posix -I/home/pedro-bittencourt/sitl/third_party/freertos/portable/ThirdParty/GCC/Posix/utils -I/home/pedro-bittencourt/sitl/third_party/freertos/include/. -isystem /home/pedro-bittencourt/sitl/config -g -std=gnu11 -o CMakeFiles/freertos_kernel_port.dir/ThirdParty/GCC/Posix/port.c.o -c /home/pedro-bittencourt/sitl/third_party/freertos/portable/ThirdParty/GCC/Posix/port.c",
+  "file": "/home/pedro-bittencourt/sitl/third_party/freertos/portable/ThirdParty/GCC/Posix/port.c",
+  "output": "third_party/freertos/portable/CMakeFiles/freertos_kernel_port.dir/ThirdParty/GCC/Posix/port.c.o"
+},
+{
+  "directory": "/home/pedro-bittencourt/sitl/build/third_party/freertos/portable",
+  "command": "/usr/lib/ccache/cc  -I/home/pedro-bittencourt/sitl/third_party/freertos/portable/ThirdParty/GCC/Posix -I/home/pedro-bittencourt/sitl/third_party/freertos/portable/ThirdParty/GCC/Posix/utils -I/home/pedro-bittencourt/sitl/third_party/freertos/include/. -isystem /home/pedro-bittencourt/sitl/config -g -std=gnu11 -o CMakeFiles/freertos_kernel_port.dir/ThirdParty/GCC/Posix/utils/wait_for_event.c.o -c /home/pedro-bittencourt/sitl/third_party/freertos/portable/ThirdParty/GCC/Posix/utils/wait_for_event.c",
+  "file": "/home/pedro-bittencourt/sitl/third_party/freertos/portable/ThirdParty/GCC/Posix/utils/wait_for_event.c",
+  "output": "third_party/freertos/portable/CMakeFiles/freertos_kernel_port.dir/ThirdParty/GCC/Posix/utils/wait_for_event.c.o"
+},
+{
+  "directory": "/home/pedro-bittencourt/sitl/build/port/pc_linux",
+  "command": "/usr/lib/ccache/cc  -I/home/pedro-bittencourt/sitl/config -I/home/pedro-bittencourt/sitl/hal/Inc -I/home/pedro-bittencourt/sitl/utl/Inc -g -std=gnu11 -o CMakeFiles/port_linux.dir/gpio.c.o -c /home/pedro-bittencourt/sitl/port/pc_linux/gpio.c",
+  "file": "/home/pedro-bittencourt/sitl/port/pc_linux/gpio.c",
+  "output": "port/pc_linux/CMakeFiles/port_linux.dir/gpio.c.o"
+},
+{
+  "directory": "/home/pedro-bittencourt/sitl/build/port/pc_linux",
+  "command": "/usr/lib/ccache/cc  -I/home/pedro-bittencourt/sitl/config -I/home/pedro-bittencourt/sitl/hal/Inc -I/home/pedro-bittencourt/sitl/utl/Inc -g -std=gnu11 -o CMakeFiles/port_linux.dir/time.c.o -c /home/pedro-bittencourt/sitl/port/pc_linux/time.c",
+  "file": "/home/pedro-bittencourt/sitl/port/pc_linux/time.c",
+  "output": "port/pc_linux/CMakeFiles/port_linux.dir/time.c.o"
+}
+]

@@ -7,6 +7,7 @@
 
 static void app_task(void *arg)
 {
+    (void)arg;
     while (1)
     {
         hal_loop();
@@ -16,6 +17,7 @@ static void app_task(void *arg)
 
 int main(void)
 {
+    printf("Main start\n");
     hal_init();
 
     xTaskCreate(app_task, "App Task", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL);

@@ -39,29 +39,47 @@ extern "C"
 
 #else
 
-#define UTL_LOG_HEADER(mod, fmt, file, line)                                                                           \
-    "[%u][%s][%s:%d] " fmt, (unsigned int)hal_time_get_ms(), (char *)utl_dbg_mod_name_get(mod), file, line
-#define UTL_LOG_HEADER_TS(fmt) "[%u] " fmt, (unsigned int)hal_time_get_ms()
+#include <unistd.h>
+
+#define UTL_DBG_BUF_SIZE 256
 
 #define UTL_DBG_PRINTF(mod, fmt, ...)                                                                                  \
     do                                                                                                                 \
     {                                                                                                                  \
         if (utl_dbg_mod_enabled(mod))                                                                                  \
-            printf(UTL_LOG_HEADER(mod, fmt, utl_dbg_base_name_get(__FILE__), __LINE__), ##__VA_ARGS__);                \
+        {                                                                                                              \
+            char _dbg_buf[UTL_DBG_BUF_SIZE];                                                                           \
+            int _dbg_len = snprintf(_dbg_buf, sizeof(_dbg_buf), "[%u][%s][%s:%d] " fmt,                                \
+                                    (unsigned int)hal_time_get_ms(), (char *)utl_dbg_mod_name_get(mod),                \
+                                    utl_dbg_base_name_get(__FILE__), __LINE__, ##__VA_ARGS__);                          \
+            if (_dbg_len > 0)                                                                                          \
+                write(STDOUT_FILENO, _dbg_buf, (_dbg_len < (int)sizeof(_dbg_buf)) ? _dbg_len : (int)sizeof(_dbg_buf)); \
+        }                                                                                                              \
     } while (0)
 
 #define UTL_DBG_PRINTF_NH(mod, fmt, ...)                                                                               \
     do                                                                                                                 \
     {                                                                                                                  \
         if (utl_dbg_mod_enabled(mod))                                                                                  \
-            printf(fmt, ##__VA_ARGS__);                                                                                \
+        {                                                                                                              \
+            char _dbg_buf[UTL_DBG_BUF_SIZE];                                                                           \
+            int _dbg_len = snprintf(_dbg_buf, sizeof(_dbg_buf), fmt, ##__VA_ARGS__);                                   \
+            if (_dbg_len > 0)                                                                                          \
+                write(STDOUT_FILENO, _dbg_buf, (_dbg_len < (int)sizeof(_dbg_buf)) ? _dbg_len : (int)sizeof(_dbg_buf)); \
+        }                                                                                                              \
     } while (0)
 
 #define UTL_DBG_PRINTF_TS(mod, fmt, ...)                                                                               \
     do                                                                                                                 \
     {                                                                                                                  \
         if (utl_dbg_mod_enabled(mod))                                                                                  \
-            printf(UTL_LOG_HEADER_TS(fmt), ##__VA_ARGS__);                                                             \
+        {                                                                                                              \
+            char _dbg_buf[UTL_DBG_BUF_SIZE];                                                                           \
+            int _dbg_len = snprintf(_dbg_buf, sizeof(_dbg_buf), "[%u] " fmt,                                           \
+                                    (unsigned int)hal_time_get_ms(), ##__VA_ARGS__);                                   \
+            if (_dbg_len > 0)                                                                                          \
+                write(STDOUT_FILENO, _dbg_buf, (_dbg_len < (int)sizeof(_dbg_buf)) ? _dbg_len : (int)sizeof(_dbg_buf)); \
+        }                                                                                                              \
     } while (0)
 
 #define UTL_DBG_DUMP(mod, data, size)                                                                                  \
