@@ -1,7 +1,5 @@
 #pragma once
 
-typedef void (*hal_gpio_cbk_t)(void);
-
 #define XMACRO_GPIO_PINS                                                                                               \
     X(HAL_GPIO_PIN_0, 0)                                                                                               \
     X(HAL_GPIO_PIN_1, 1)
@@ -29,12 +27,20 @@ typedef enum hal_gpio_mode_e
     HAL_GPIO_MODE_IT_RISING_FALLING,
 } hal_gpio_mode_t;
 
+typedef enum hal_gpio_edge_e
+{
+    HAL_GPIO_EDGE_FALLING = 0,  
+    HAL_GPIO_EDGE_RISING,
+} hal_gpio_edge_t;
+
 typedef enum hal_gpio_pull_e
 {
     HAL_GPIO_PULL_NONE = 0, /**< Sem pull up ou down */
     HAL_GPIO_PULL_UP,       /**< Com pull up*/
     HAL_GPIO_PULL_DOWN,     /**< Com pull down */
 } hal_gpio_pull_t;
+
+typedef void (*hal_gpio_cbk_t)(hal_gpio_pin_t pin, hal_gpio_edge_t edge);
 
 typedef struct hal_gpio_driver_s
 {

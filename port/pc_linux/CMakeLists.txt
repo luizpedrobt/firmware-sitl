@@ -5,6 +5,8 @@ add_library(port_linux STATIC
 )
 
 target_link_libraries(port_linux PUBLIC
+
+    freertos_kernel
     project_config
     hal
 )

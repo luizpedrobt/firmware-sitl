@@ -17,10 +17,9 @@ static void app_task(void *arg)
 
 int main(void)
 {
-    printf("Main start\n");
     hal_init();
 
-    xTaskCreate(app_task, "App Task", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL);
+    xTaskCreate(app_task, "App Task", configMINIMAL_STACK_SIZE, NULL, 5, NULL);
     vTaskStartScheduler();
 
     return 0;

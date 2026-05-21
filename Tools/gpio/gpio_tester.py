@@ -3,7 +3,7 @@ import random
 import time
 import os
 
-GPIO_FILE = "../gpio.bin"
+GPIO_FILE = "../../port/pc_linux/gpio.bin"
 HEADER = 0xDEADBEEF
 
 FMT = "<I B B"

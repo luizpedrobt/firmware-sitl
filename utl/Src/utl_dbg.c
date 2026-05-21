@@ -94,5 +94,5 @@ void utl_dbg_dump(char *stamp, uint8_t *data, size_t size)
 void utl_dbg_init(void)
 {
     utl_dbg_mod_enable(UTL_DBG_MOD_APP);
-    utl_dbg_mod_enable(UTL_DBG_MOD_GPIO);
+    // utl_dbg_mod_enable(UTL_DBG_MOD_GPIO);
 }

@@ -1,5 +1,12 @@
 #include "hal.h"
+#include "hal_gpio.h"
+#include "utl_dbg.h"
+#include <stdbool.h>
 #include <stdio.h>
+#include <unistd.h>
+
+#include "FreeRTOS.h"
+#include "task.h"
 
 #define PACKED __attribute__((packed))
 #define HEADER 0xDEADBEEF
@@ -18,7 +25,15 @@ typedef struct gpio_permission_s
     bool can_write;
 } gpio_permission_t;
 
-// ==========================================================================================
+typedef struct gpio_interrupt_handler_s
+{
+    bool intr_enable;
+    hal_gpio_mode_t intr_mode;
+} gpio_interrupt_handler_t;
+
+// ========================================================================================== 
+
+static const utl_dbg_modules_t TAG = UTL_DBG_MOD_GPIO;
 
 static gpio_record_t gpio_ctrl[HAL_GPIO_PIN_NUM] = {
 #define X(PIN, INDEX) {.header = HEADER, .pin = PIN, .state = 0},
@@ -32,15 +47,119 @@ static gpio_permission_t gpio_permissions[HAL_GPIO_PIN_NUM] = {
 #undef X
 };
 
-static FILE *fp = NULL;
+static hal_gpio_cbk_t gpio_cbks[HAL_GPIO_PIN_NUM] = { 0 };
 
-// ==========================================================================================
+static gpio_interrupt_handler_t gpio_intr_obj[HAL_GPIO_PIN_NUM] = { 0 };
+
+static TaskHandle_t gpio_task_handler[HAL_GPIO_PIN_NUM] = { 0 };
+
+static char gpio_file_path[PATH_MAX] = {0};
+
+// ========================================================================================== 
+
+static void gpio_build_file_path(void)
+{
+    static bool initialized = false;
+
+    if(initialized)
+    {
+        return;
+    }
+
+    initialized = true;
+
+    strncpy(gpio_file_path, __FILE__, sizeof(gpio_file_path) - 1);
+
+    char *last_slash = strrchr(gpio_file_path, '/');
+
+    if(last_slash)
+    {
+        *(last_slash + 1) = '\0';
+    }
+
+    strncat(gpio_file_path,
+            "gpio.bin",
+            sizeof(gpio_file_path) - strlen(gpio_file_path) - 1);
+}
+
+static FILE *gpio_file_open(void)
+{
+    gpio_build_file_path();
+
+    FILE *fp = fopen(gpio_file_path, "r+b");
+
+    if(!fp)
+    {
+        fp = fopen(gpio_file_path, "w+b");
+    }
+
+    return fp;
+}
+
+static void gpio_monitor_edge(void *args)
+{
+    hal_gpio_pin_t pin = (hal_gpio_pin_t)(uintptr_t)args;
+    if(!gpio_intr_obj[pin].intr_enable)
+    {
+        vTaskDelete(NULL);
+    }
+
+    bool last_state = hal_gpio_get(pin);
+
+    while(gpio_intr_obj[pin].intr_enable)
+    {
+        bool current_state = hal_gpio_get(pin);
+        if(current_state != last_state)
+        {
+            hal_gpio_edge_t edge = current_state ? HAL_GPIO_EDGE_RISING : HAL_GPIO_EDGE_FALLING;
+
+            switch (gpio_intr_obj[pin].intr_mode)
+            {
+                case HAL_GPIO_MODE_IT_RISING:
+                    if((current_state) && (gpio_cbks[pin]))
+                    {
+                        gpio_cbks[pin](pin, edge);
+                    }
+                    break;
+
+                case HAL_GPIO_MODE_IT_FALLING:
+                    if(!current_state && (gpio_cbks[pin]))
+                    {
+                        gpio_cbks[pin](pin, edge);
+                    }
+                    break;
+
+                case HAL_GPIO_MODE_IT_RISING_FALLING:
+                    if(gpio_cbks[pin])
+                    {
+                        gpio_cbks[pin](pin, edge);
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+            
+            last_state = current_state;
+        }
+
+        vTaskDelay(pdMS_TO_TICKS(10));
+    }
+
+    gpio_task_handler[pin] = NULL;
+    gpio_cbks[pin] = NULL;
+    vTaskDelete(NULL);
+}
 
 static void gpio_sync_from_file(void)
 {
-    FILE *fp = fopen("gpio.bin", "rb");
+    gpio_build_file_path();
+    FILE *fp = gpio_file_open();
+
     if (!fp)
+    {
         return;
+    }
 
     gpio_record_t rec;
 
@@ -60,7 +179,8 @@ static void gpio_sync_from_file(void)
 
 static void port_gpio_configure(hal_gpio_pin_t pin, hal_gpio_mode_t mode, hal_gpio_pull_t pull, hal_gpio_cbk_t cbk)
 {
-    fp = fopen("gpio.bin", "ab");
+    gpio_build_file_path();
+    FILE *fp = gpio_file_open();
     if (!fp)
     {
         return;
@@ -68,21 +188,46 @@ static void port_gpio_configure(hal_gpio_pin_t pin, hal_gpio_mode_t mode, hal_gp
 
     switch (mode)
     {
-    case HAL_GPIO_MODE_INPUT:
-        gpio_permissions[pin].can_read = true;
-        gpio_permissions[pin].can_write = false;
-        break;
+        case HAL_GPIO_MODE_INPUT:
+            gpio_permissions[pin].can_read = true;
+            gpio_permissions[pin].can_write = false;
 
-    case HAL_GPIO_MODE_OUTPUT:
-        gpio_permissions[pin].can_read = true;
-        gpio_permissions[pin].can_write = true;
-        break;
+            gpio_intr_obj[pin].intr_enable = false;
+            gpio_intr_obj[pin].intr_mode = mode;
 
-    default:
-        break;
+            break;
+
+        case HAL_GPIO_MODE_OUTPUT:
+            gpio_permissions[pin].can_read = true;
+            gpio_permissions[pin].can_write = true;
+
+            gpio_intr_obj[pin].intr_enable = false;
+            gpio_intr_obj[pin].intr_mode = mode;
+
+            break;
+
+        case HAL_GPIO_MODE_IT_RISING:
+        case HAL_GPIO_MODE_IT_FALLING:
+        case HAL_GPIO_MODE_IT_RISING_FALLING:
+        
+            gpio_permissions[pin].can_read = true;
+            gpio_permissions[pin].can_write = false;
+
+            gpio_intr_obj[pin].intr_enable = true;
+            gpio_intr_obj[pin].intr_mode = mode;
+
+            if((cbk) && (gpio_task_handler[pin] == NULL))
+            {
+                gpio_cbks[pin] = cbk;
+                xTaskCreate(gpio_monitor_edge, "Task Monitoration Board", 1024, (void *)pin, 1, &gpio_task_handler[pin]);
+            }
+
+            break;
+
+        default:
+            break;
     }
 
-    // garante header correto
     gpio_ctrl[pin].header = HEADER;
     gpio_ctrl[pin].pin = pin;
 
@@ -96,26 +241,36 @@ static void port_gpio_configure(hal_gpio_pin_t pin, hal_gpio_mode_t mode, hal_gp
 
 static void port_gpio_interrupt_set(hal_gpio_pin_t pin, hal_gpio_interrupt_state_t state)
 {
-    (void)pin;
-    (void)state;
+    switch (state) 
+    {
+        case HAL_GPIO_INTERRUPT_DISABLE:
+            return;
+
+        case HAL_GPIO_INTERRUPT_ENABLE:
+            return;
+    }
 }
 
 static void port_gpio_interrupt_clear(hal_gpio_pin_t pin)
 {
-    (void)pin;
+    gpio_intr_obj[pin].intr_enable = false;
+
+    UTL_DBG_PRINTF(TAG, "GPIO%d interrupt cleared!\n", pin);
 }
 
 static void port_gpio_set(hal_gpio_pin_t pin, bool state)
 {
     if (!gpio_permissions[pin].can_write)
     {
-        UTL_DBG_PRINTF(UTL_DBG_MOD_GPIO, "GPIO pin %d write permission denied!\n", pin);
+        UTL_DBG_PRINTF(TAG, "GPIO%d write permission denied!\n", pin);
         return;
     }
 
     gpio_ctrl[pin].state = state;
 
-    fp = fopen("gpio.bin", "r+b");
+    gpio_build_file_path();
+    FILE *fp = gpio_file_open();
+
     if (!fp)
     {
         return;
@@ -128,7 +283,7 @@ static void port_gpio_set(hal_gpio_pin_t pin, bool state)
 
     fclose(fp);
 
-    UTL_DBG_PRINTF(UTL_DBG_MOD_GPIO, "GPIO pin %d set to %d\n", pin, state);
+    UTL_DBG_PRINTF(TAG, "GPIO pin %d set to %d\n", pin, state);
 }
 
 static bool port_gpio_get(hal_gpio_pin_t pin)
@@ -139,21 +294,24 @@ static bool port_gpio_get(hal_gpio_pin_t pin)
     }
 
     gpio_sync_from_file();
-    UTL_DBG_PRINTF(UTL_DBG_MOD_GPIO, "GPIO pin %d state: %d\n", pin, gpio_ctrl[pin].state);
+    UTL_DBG_PRINTF(TAG, "GPIO%d state: %d\n", pin, gpio_ctrl[pin].state);
 
     return gpio_ctrl[pin].state;
 }
+
 static void port_gpio_toggle(hal_gpio_pin_t pin)
 {
     if (!gpio_permissions[pin].can_write)
     {
-        UTL_DBG_PRINTF(UTL_DBG_MOD_GPIO, "GPIO pin %d write permission denied!\n", pin);
+        UTL_DBG_PRINTF(TAG, "GPIO%d write permission denied!\n", pin);
         return;
     }
 
     gpio_ctrl[pin].state = !gpio_ctrl[pin].state;
 
-    fp = fopen("gpio.bin", "r+b");
+    gpio_build_file_path();
+    FILE *fp = gpio_file_open();
+    
     if (!fp)
     {
         return;
@@ -166,7 +324,7 @@ static void port_gpio_toggle(hal_gpio_pin_t pin)
 
     fclose(fp);
 
-    UTL_DBG_PRINTF(UTL_DBG_MOD_GPIO, "GPIO pin %d toggled to %d\n", pin, gpio_ctrl[pin].state);
+    UTL_DBG_PRINTF(TAG, "GPIO%d toggled to %d\n", pin, gpio_ctrl[pin].state);
 }
 
 hal_gpio_driver_t HAL_GPIO_DRIVER = {.configure = port_gpio_configure,
